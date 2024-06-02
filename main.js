@@ -1,6 +1,7 @@
 import { Application, Assets, Sprite } from 'pixi.js'
 import { addFishes, animateFishes } from './addFishes'
 import { addBackground } from './addBackground'
+import { addWaterOverlay, animateWaterOverlay } from './addWaterOverlay'
 
 const app = new Application()
 async function setup() {
@@ -55,4 +56,6 @@ async function preload() {
   const fishes = []
   addFishes(app, fishes)
   app.ticker.add((time) => animateFishes(app, fishes, time))
+  addWaterOverlay(app)
+  app.ticker.add((time) => animateWaterOverlay(app, time))
 })()
