@@ -1,5 +1,6 @@
 import { Application, Assets, Sprite } from 'pixi.js'
 import { addFishes, animateFishes } from './addFishes'
+import { addBackground } from './addBackground'
 
 const app = new Application()
 async function setup() {
@@ -48,18 +49,9 @@ async function preload() {
 ;(async () => {
   await setup()
   await preload()
-  const background = Sprite.from('background')
-  background.anchor.set(0.5)
-  if (app.screen.width > app.screen.height) {
-    background.width = app.screen.width * 1.2
-    background.scale.y = background.scale.x
-  } else {
-    background.height = app.screen.height * 1.2
-    background.scale.x = background.scale.y
-  }
-  background.x = app.screen.width / 2
-  background.y = app.screen.height / 2
-  app.stage.addChild(background)
+
+  addBackground(app)
+
   const fishes = []
   addFishes(app, fishes)
   app.ticker.add((time) => animateFishes(app, fishes, time))
